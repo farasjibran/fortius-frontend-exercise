@@ -10,7 +10,9 @@ import {
 	QueryClientProvider,
 	dehydrate,
 } from '@tanstack/react-query';
+import { SessionProvider } from 'next-auth/react';
 import React, { ReactNode } from 'react';
+import AuthWrapper from './AuthWrapper';
 
 export default function AppWrappers({
 	children,
@@ -32,7 +34,11 @@ export default function AppWrappers({
 		<QueryClientProvider client={queryClient}>
 			<HydrationBoundary state={dehydratedState}>
 				<CacheProvider>
-					<ChakraProvider theme={theme}>{children}</ChakraProvider>
+					<SessionProvider>
+						<AuthWrapper>
+							<ChakraProvider theme={theme}>{children}</ChakraProvider>
+						</AuthWrapper>
+					</SessionProvider>
 				</CacheProvider>
 			</HydrationBoundary>
 		</QueryClientProvider>

@@ -1,8 +1,10 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
+import { clientEnv } from '@/env/client.environment';
+
 const ApiClient = () => {
 	const instance = axios.create({
-		baseURL: '',
+		baseURL: clientEnv.API_BASE_URL,
 		headers: {
 			'Content-Type': 'application/json',
 			'X-Requested-With': 'XMLHttpRequest',

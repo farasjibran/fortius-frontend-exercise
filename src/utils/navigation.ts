@@ -6,7 +6,7 @@ export const findCurrentRoute = (routes: IRoute[]): IRoute => {
 	const foundRoute: IRoute | undefined = routes.find(
 		(route) =>
 			isWindowAvailable() &&
-			window.location.href.indexOf(route.layout + route.path) !== -1 &&
+			window.location.pathname == route.layout + route.path &&
 			route
 	);
 
@@ -16,7 +16,8 @@ export const findCurrentRoute = (routes: IRoute[]): IRoute => {
 
 export const getActiveRoute = (routes: IRoute[]): string => {
 	const route = findCurrentRoute(routes);
-	return route?.name || 'Default Brand Text';
+
+	return route?.name || '';
 };
 
 export const getActiveNavbar = (routes: IRoute[]): boolean => {
